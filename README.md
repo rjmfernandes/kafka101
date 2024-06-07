@@ -2,6 +2,28 @@
 
 Introduction Kafka 1o1.
 
+- [Kafka 1o1](#kafka-1o1)
+  - [Setup](#setup)
+    - [Start Docker Compose](#start-docker-compose)
+    - [Check Control Center](#check-control-center)
+    - [Create First Topic](#create-first-topic)
+    - [Command line producer-consumer](#command-line-producer-consumer)
+  - [Java Basic Producer](#java-basic-producer)
+  - [Avro Schema Based Producer](#avro-schema-based-producer)
+    - [Register Schema](#register-schema)
+    - [Create Topic](#create-topic)
+    - [Run Producer](#run-producer)
+  - [Consumers](#consumers)
+    - [Basic Consumer](#basic-consumer)
+    - [Avro Schema Based Consumer](#avro-schema-based-consumer)
+  - [Consumer Groups](#consumer-groups)
+  - [Connect](#connect)
+    - [Setup](#setup-1)
+    - [Source Connector](#source-connector)
+    - [Sink Connector](#sink-connector)
+  - [Cleanup](#cleanup)
+
+
 ## Setup
 
 ### Start Docker Compose
@@ -282,7 +304,9 @@ Now if we list our plugins again we should see two new ones corresponding to the
 We will need a postgres database so let's cd into the postgres folder in another shell and execute:
 
 ```bash
+cd postgres
 docker compose up -d
+cd ..
 ```
 
 Now with a postgres client as pgAdmin4 we can create connection to our database using:
@@ -296,7 +320,7 @@ password: password
 
 ### Source Connector
 
-Let's create a source connector using datagen from the controlcenter.
+Let's create a source connector using datagen:
 
 ```bash
 curl -i -X PUT -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/my-datagen-source/config -d '{
@@ -354,4 +378,5 @@ From the root of the project:
 docker compose down -v
 cd postgres
 docker compose down -v
+cd ..
 ```
